@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://iscople.gescicca.net data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/calendar_green.css">
+        <title>CNAM_ENF</title>
+    </head>
+    <body>
+        <div class="cssload-loader" id="loader">
+        	<div class="cssload-inner cssload-one"></div>
+        	<div class="cssload-inner cssload-two"></div>
+        	<div class="cssload-inner cssload-three"></div>
+        </div>
+
+        <div id="planning" style="display:none"></div>
+
+        <div id="controls" style="display:none">
+            <button type="button" id="previous">Semaine précédente</button>
+            <button type="button" id="next">Semaine suivante</button>
+        </div>
+
+        <form id="loadForm" action="" method="post" role="form">
+            <input type="hidden" name="uid" value="9bd54ce86a0f1b1810166554a9ff903a">
+            <input type="hidden" name="code_scolarite" value="NAQ400940">
+            <input type="hidden" name="cr" value="NAQ">
+            <button type="submit" name="button">Connect</button>
+    	</form>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/daypilot-all.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
