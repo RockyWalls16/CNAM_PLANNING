@@ -18,6 +18,8 @@
     <platform name="android">
         <allow-intent href="market:*" />
         <preference name="Orientation" value="sensorLandscape" />
+        <preference name="Fullscreen" value="true" />
+        <preference name="EnableViewportScale" value="true" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />

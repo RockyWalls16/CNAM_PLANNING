@@ -1,39 +1,154 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://iscople.gescicca.net data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://iscople.gescicca.net https://lecnam.net https://sts.lecnam.net data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src 'self'; img-src 'self' data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta charset="UTF-8">
-        <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=0.1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/loader.css">
+        <link rel="stylesheet" type="text/css" href="css/index.min.css">
         <link rel="stylesheet" type="text/css" href="css/calendar_green.css">
         <title>CNAM_ENF</title>
     </head>
     <body>
-        <div class="cssload-loader" id="loader">
-        	<div class="cssload-inner cssload-one"></div>
-        	<div class="cssload-inner cssload-two"></div>
-        	<div class="cssload-inner cssload-three"></div>
+        <div id="page1" style="display: none;">
+            <iframe src="https://lecnam.net" width="100%" height="100%"></iframe>
+
+            <form action="" id="connectForm">
+                <img src="./img/header.jpg" alt="" width="315px"/>
+                <div class="group">
+                    <input id="loginUsername" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Identifiant</label>
+                </div>
+                <div class="group">
+                    <input id="loginPassword" type="password" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Mot de passe</label>
+                </div>
+                <div id="loginErrorMessage">Erreur</div>
+                <button id="loginButton" class="btn" type="submit"><span>Se connecter</span></button>
+            </form>
         </div>
+        <div id="page2" style="display: none;">
+            <div id="loader" style="display: none">
+                <div class="cssload-loader">
+                    <div class="cssload-inner cssload-one"></div>
+                    <div class="cssload-inner cssload-two"></div>
+                    <div class="cssload-inner cssload-three"></div>
+                </div>
+                <p>Chargement du planning...</p>
+            </div>
 
-        <div id="planning" style="display:none"></div>
+            <div id="topBar">
+                <div id="topBarInternal" style="display: none">
+                    <div id="menuContainer">
+                        <img src="./img/menu.png">
+                    </div>
+                    <div class="menuDay">Lundi</div>
+                    <div class="menuDay">Mardi</div>
+                    <div class="menuDay">Mercredi</div>
+                    <div class="menuDay">Jeudi</div>
+                    <div class="menuDay">Vendredi</div>
+                    <div class="menuDay">Samedi</div>
+                    <div class="menuDay">Dimanche</div>
+                </div>
+            </div>
 
-        <div id="controls" style="display:none">
-            <button type="button" id="previous">Semaine précédente</button>
-            <button type="button" id="next">Semaine suivante</button>
+            <div id="leftBar" style="display: none;">
+
+            </div>
+
+            <div id="overlayPannel" style="display:none;">
+
+
+                <div id="overlayError" class="overlayCenter" style="display: none">
+                    <div class="overlayBar">
+                        <span id="errorTitle" class="overlayTitle">Erreur</span>
+                    </div>
+                    <hr>
+                    <span id="errorInfo">Info</span>
+                    <br/>
+                    <div style="width: 100%; text-align: center;">
+                        <button id="okButton" class="errorButton btn" type="button"><span>Continuer</span></button>
+                        <button id="retryButton" class="errorButton btn" type="button"><span>Réesayer</span></button>
+                    </div>
+                </div>
+
+                <div id="overlayInfo" class="overlayCenter" style="display: none">
+                    <div class="overlayBar">
+                        <span class="overlayTitle">Informations</span>
+                    </div>
+                    <ul>
+                        <li>Cette application n'est pas codé par le CNAM</li>
+                        <li>L'application est gratuite</li>
+                        <li>L'application utilise la licence <a href="https://fr.wikipedia.org/wiki/Licence_MIT" target="_blank">MIT</a></li>
+                        <li>Le logo <img src="img/header.jpg" width="64px" style="vertical-align:middle"> est une propriété intellectuelle du CNAM</li>
+                        <li>Retrouvez le code (de qualité plus que douteuse) sur <a href="https://github.com/valentin4311/CNAM_PLANNING">GITHUB</a></li>
+                    </ul>
+                </div>
+
+
+                <div id="overlayEventInfo" class="overlayCenter" style="display: none;">
+                    <div class="overlayBar">
+                        <span id="evTitle" class="overlayTitle">Title</span>
+                    </div>
+                    <span class="overlayLabel">Salle: </span><span id="evRoom">Salle</span>
+                    <br/>
+                    <span class="overlayLabel">Enseignant: </span><span id="evTeacher">Enseignant</span>
+                    <br/>
+                    <span class="overlayLabel">Modalite: </span><span id="evModality">Modalite</span>
+                    <br/>
+                    <span class="overlayLabel">UE: </span><span id="evUE">UE </span><span id="evECTS">ECTS</span>
+                    <br/>
+                    <span class="overlayLabel">Type: </span><span id="evType">type</span>
+                    <br/>
+                    <span class="overlayLabel">Date: </span><span id="evDate">date</span>
+                    <hr>
+                    <span id="evTheme">Theme</span>
+                </div>
+
+
+                <div id="overlayMenu" class="overlayCenter" style="display: none;">
+                    <div class="overlayBar">
+                        <span class="overlayTitle">Menu :</span>
+                    </div>
+                    <div class="buttonAligned">
+                        <span class="overlayLabel leftFloated">Cache: </span><span id="lastCache" class="emptySpace">Erreur</span>
+                    </div>
+                    <button type="button" class="btn rightFloated" id="reloadButton"><span>Recharger</span></button>
+                    <div class="clear"></div>
+
+                    <div class="buttonAligned">
+                        <span class="overlayLabel leftFloated">Identifiant: </span><span id="userCDSC" class="emptySpace">Erreur</span>
+                    </div>
+                    <button type="button" class="btn rightFloated" id="disconnect"><span>Déconnexion</span></button>
+                    <div class="clear"></div>
+                    <div class="buttonAligned">
+                        <span class="overlayLabel leftFloated">Informations</span>
+                    </div>
+                    <button type="button" class="btn rightFloated" id="informations"><span>Ouvrir</span></button>
+                    <div class="clear"></div>
+                    <hr>
+                    <span class="leftFloated"><span class="overlayLabel">V:</span> 1.0</span><span class="rightAligned">By Valentin LEGEAY</span>
+                </div>
+            </div>
+
+            <div id="planning" style="display:none"></div>
+
+            <div id="controls" style="display:none">
+                <button type="button" class="btn" id="previous"><span>Semaine précédente</span></button>
+                <button type="button" class="btn" id="next"><span>Semaine suivante</span></button>
+            </div>
         </div>
-
-        <form id="loadForm" action="" method="post" role="form">
-            <input type="hidden" name="uid" value="9bd54ce86a0f1b1810166554a9ff903a">
-            <input type="hidden" name="code_scolarite" value="NAQ400940">
-            <input type="hidden" name="cr" value="NAQ">
-            <button type="submit" name="button">Connect</button>
-    	</form>
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/daypilot-all.min.js"></script>
+        <script type="text/javascript" src="js/utils.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>

@@ -22,4 +22,6 @@
     <allow-intent href="market:*" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="Orientation" value="sensorLandscape" />
+    <preference name="Fullscreen" value="true" />
+    <preference name="EnableViewportScale" value="true" />
 </widget>

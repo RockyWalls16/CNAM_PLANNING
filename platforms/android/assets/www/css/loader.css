@@ -1,58 +1,8 @@
-*
-{
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
-}
-
-html, body
-{
-    height:100%;
-}
-
-body
-{
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
-    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:12px;
-    height:100%;
-    margin:0px;
-    padding:0px;
-    width:100%;
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
-
-#planning
-{
-    height: 100%;
-}
-
-#controls
-{
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 6px;
-    border-radius: 4px 0px 0px 0px;
-    bottom: 0px;
-    right: 0px;
-}
-/*
-.calendar_green_colheader_inner
-{
-    padding-top: 7px;
-}*/
-
-
-
-
-
 
 .cssload-loader {
 	position: fixed;
 	left: calc(50% - 31px);
-    top: calc(50% - 31px);
+    top: calc(50% - 61px);
 	width: 62px;
 	height: 62px;
 	border-radius: 50%;
