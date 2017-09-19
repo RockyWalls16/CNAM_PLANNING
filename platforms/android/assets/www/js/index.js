@@ -1,4 +1,7 @@
 var loginAdress = "https://sts.lecnam.net/idp/Authn/UserPassword";
+var loginAdress2 = "https://lecnam.net/";
+var logoutAdress = "https://lecnam.net/authentification_deconnexion";
+var disconnectAdress = "https://sts.lecnam.net/idp/profile/Logout";
 var planningAdress = "https://iscople.gescicca.net/Planning.aspx";
 
 //Material colors
@@ -17,6 +20,10 @@ var app =
 
     onDeviceReady: function()
     {
+        document.cookie = "";
+        var trulyLogged = false;
+        var permanentStorage = window.localStorage;
+
         var permanentStorage = window.localStorage;
         var uid = permanentStorage.getItem("uid");
         if(uid != null)
@@ -38,6 +45,7 @@ var app =
                 //Check is login page
                 if($("#login", iframe) != null)
                 {
+                    trulyLogged = true;
                     $("input[name='j_username']", iframe).val($("#loginUsername").val());
                     $("input[name='j_password']", iframe).val($("#loginPassword").val());
                     $("#login", iframe).submit();
@@ -53,19 +61,17 @@ var app =
                     var url = $("iframe")[0].contentWindow.location.href;
                     var uidElement = $(".JclickApp", iframe);
                     console.log(url);
+                    console.log(uidElement, trulyLogged);
 
-                    //Login fail or init
-                    if(url == loginAdress)
+                    //Fix already logged
+                    if(!trulyLogged && uidElement.length != 0 && url != disconnectAdress)
                     {
-                        var error = $("#login > section > .form-error", iframe);
-                        if(error)
-                        {
-                            $("#loginErrorMessage").html(error);
-                            $("#loginErrorMessage").show();
-                            $("#loginButton")[0].disabled = false;
-                        }
-                    }//Connected
-                    else if(uidElement != null)
+                        console.log("Disconnect now");
+                        $("iframe")[0].src = logoutAdress;
+                    }
+
+                    //Main page
+                    if(uidElement.length != 0 && trulyLogged)
                     {
                         uidElement = $(".JclickApp", $("iframe").contents());
                         console.log(uidElement);
@@ -78,6 +84,7 @@ var app =
                             //Locate right link
                             if(link.startsWith(planningAdress))
                             {
+                                console.log("Found ids");
                                 var linkParams = link.match(/.*uid=(.*)&code_scolarite=(.*)&cr=(.*)/);
                                 var permanentStorage = window.localStorage;
                                 permanentStorage.setItem("uid", linkParams[1]);
@@ -87,8 +94,25 @@ var app =
                             }
                         }
 
-                    }//Unknow page (for some reason)
-                    else
+                    }
+                    //Login fail or init
+                    else if(url == loginAdress || url == loginAdress2)
+                    {
+                        var error = $("#login > section > .form-error", iframe);
+                        if(error)
+                        {
+                            $("#loginErrorMessage").html(error);
+                            $("#loginErrorMessage").show();
+                            $("#loginButton")[0].disabled = false;
+                        }
+                    }//Connected
+                    //Redirect to login
+                    else if(url == disconnectAdress)
+                    {
+                        $("iframe")[0].src = loginAdress2;
+                    }
+                    //Unknow page (for some reason)
+                    else if(url != "https://sts.lecnam.net/idp/profile/SAML2/Redirect/SSO")
                     {
                         $("#loginErrorMessage").html("Erreur inconnue...<br/>Réesayez plus tard ou videz le cache");
                         $("#loginErrorMessage").show();
@@ -108,6 +132,7 @@ var app =
 
     onLogged: function()
     {
+        console.log("Logged");
         $("body").css("min-width", "1200px");
         $("#page1").hide();
         $("#page2").show();
@@ -153,6 +178,23 @@ var app =
         {
             $('#reloadButton')[0].disabled = true;
             loadPlanning();
+        });
+
+        $("#disconnect").click(function(e)
+        {
+            var permanentStorage = window.localStorage;
+            permanentStorage.clear();
+            location.reload();
+        });
+
+        $("#informations").click(function(e)
+        {
+            displayOverlay("#overlayInfo");
+        });
+
+        $(".closeOverlay").click(function(e)
+        {
+            $("#overlayPannel").hide();
         });
 
         $("#overlayPannel").click(function(e)
@@ -213,6 +255,7 @@ function displayOverlay(overlayId)
     $("#overlayError").hide();
     $("#overlayEventInfo").hide();
     $("#overlayMenu").hide();
+    $("#overlayInfo").hide();
     $(overlayId).show();
     $("#overlayPannel").show();
 }
