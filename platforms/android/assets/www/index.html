@@ -12,27 +12,12 @@
         <title>CNAM_ENF</title>
     </head>
     <body>
+        <!-- Login page -->
         <div id="page1" style="display: none;">
-            <iframe src="https://lecnam.net" width="100%" height="100%"></iframe>
-
-            <form action="" id="connectForm">
-                <img src="./img/header.jpg" alt="" width="315px"/>
-                <div class="group">
-                    <input id="loginUsername" type="text" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Identifiant</label>
-                </div>
-                <div class="group">
-                    <input id="loginPassword" type="password" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Mot de passe</label>
-                </div>
-                <div id="loginErrorMessage">Erreur</div>
-                <button id="loginButton" class="btn" type="submit"><span>Se connecter</span></button>
-            </form>
+            <iframe src="" width="100%" height="100%"></iframe>
         </div>
+
+        <!-- Calendar page -->
         <div id="page2" style="display: none;">
             <div id="loader" style="display: none">
                 <div class="cssload-loader">
@@ -151,6 +136,7 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/daypilot-all.min.js"></script>
         <script type="text/javascript" src="js/utils.js"></script>
+        <script type="text/javascript" src="js/loginPage.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>
